@@ -11,7 +11,7 @@
 	<description>Extended HATEOTAS Proof-of-concept facade</description>
 
 	<parent>
-		<groupId>com.githun.forinil</groupId>
+		<groupId>com.github.forinil</groupId>
 		<artifactId>extended-hateotas</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -28,12 +28,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.githun.forinil</groupId>
+			<groupId>com.github.forinil</groupId>
 			<artifactId>extended-hateotas-common-data</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.githun.forinil</groupId>
+			<groupId>com.github.forinil</groupId>
 			<artifactId>extended-hateotas-common-shared</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

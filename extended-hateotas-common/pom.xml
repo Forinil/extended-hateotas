@@ -11,7 +11,7 @@
 	<description>Extended HATEOTAS Proof-of-concept common libraries</description>
 
 	<parent>
-		<groupId>com.githun.forinil</groupId>
+		<groupId>com.github.forinil</groupId>
 		<artifactId>extended-hateotas</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>

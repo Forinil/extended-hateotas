@@ -11,7 +11,7 @@
 	<description>Extended HATEOTAS Proof-of-concept data module</description>
 
 	<parent>
-		<groupId>com.githun.forinil</groupId>
+		<groupId>com.github.forinil</groupId>
 		<artifactId>extended-hateotas-common</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
