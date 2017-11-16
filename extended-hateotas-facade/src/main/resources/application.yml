@@ -1,0 +1,11 @@
+server:
+  port: 7000
+logging:
+  level:
+    root: INFO
+    com:
+      github:
+        forinil: TRACE
+    org:
+      springframework:
+        web: DEBUG
