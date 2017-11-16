@@ -1,0 +1,2 @@
+# extended-hateotas
+Extended HATEOTAS
