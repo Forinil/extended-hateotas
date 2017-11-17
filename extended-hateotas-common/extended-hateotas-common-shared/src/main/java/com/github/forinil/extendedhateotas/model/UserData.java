@@ -25,5 +25,5 @@ public class UserData extends ResourceSupport {
     @Getter
     @Setter
     @JsonProperty
-    private List<String> userRights;
+    private List<Right> userRights;
 }

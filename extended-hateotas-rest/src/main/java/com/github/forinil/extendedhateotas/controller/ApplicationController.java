@@ -5,6 +5,8 @@ import static org.springframework.http.MediaType.*;
 
 import com.github.forinil.extendedhateotas.model.ApplicationData;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -21,12 +23,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/application")
 public class ApplicationController {
+    private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
     @GetMapping(value = "/details/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Finds application by ID",
-            notes = "ID must be an integer",
-            response = ApplicationData.class)
+            notes = "ID must be an integer")
     public HttpEntity<ApplicationData> getApplicationData(@PathVariable(value="id") int id) {
+        logger.debug("Requested application for ID: {}", id);
         ApplicationData applicationData = new ApplicationData();
 
         applicationData.setApplicationId(id);
@@ -34,14 +37,14 @@ public class ApplicationController {
         applicationData.setCreationDate(Calendar.getInstance().getTime());
         applicationData.add(linkTo(methodOn(ApplicationController.class).getApplicationData(id)).withSelfRel());
 
+        logger.debug("Returning application: {}", applicationData);
         return new ResponseEntity<>(applicationData, HttpStatus.OK);
     }
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Lists all applications",
-            response = ApplicationData.class,
-            responseContainer = "List")
+    @ApiOperation(value = "Lists all applications")
     public HttpEntity<Resources<ApplicationData>> getAllApplications() {
+        logger.debug("Requested all applications");
         List<ApplicationData> applicationDataList = new ArrayList<>(3);
 
         for (int i = 0; i < 3; i++) {
@@ -56,6 +59,7 @@ public class ApplicationController {
 
         Resources<ApplicationData> resources = new Resources<>(applicationDataList, linkTo(methodOn(ApplicationController.class).getAllApplications()).withSelfRel());
 
+        logger.debug("Returning: {}", applicationDataList);
         return new ResponseEntity<>(resources, HttpStatus.OK);
     }
 }

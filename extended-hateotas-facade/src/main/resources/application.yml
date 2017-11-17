@@ -9,3 +9,5 @@ logging:
     org:
       springframework:
         web: DEBUG
+webservices:
+  url: http://localhost:8000/
