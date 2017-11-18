@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.forinil</groupId>
-	<artifactId>extended-hateotas</artifactId>
+	<artifactId>hateoas-dual-layer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>extended-hateotas</name>
-	<description>Extended HATEOTAS Proof-of-concept</description>
+	<name>hateoas-dual-layer</name>
+	<description>HATEOAS Dual Layer Proof-of-concept</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -19,9 +19,9 @@
 	</parent>
 
 	<modules>
-		<module>extended-hateotas-common</module>
-		<module>extended-hateotas-rest</module>
-		<module>extended-hateotas-facade</module>
+		<module>hateoas-dual-layer-backend</module>
+		<module>hateoas-dual-layer-common</module>
+		<module>hateoas-dual-layer-frontend-facade</module>
 	</modules>
 
 	<properties>
