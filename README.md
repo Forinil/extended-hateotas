@@ -1,18 +1,26 @@
-# Extended HATEOTAS
-
+# HATEOASDualLayer
+HATEOAS Dual Layer Proof-of-concept
 
 ## Modules
-* `extended-hateotas-rest` - pure REST HATEOTAS API for single domain (here for simplicity one app for both Application and Security domain)
-* `extended-hateotas-facade` - REST facade for front-end
+* `hateoas-dual-layer-backend` - REST HATEOAS API for single domain (here for simplicity one app for both Application and Security domain)
+* `hateoas-dual-layer-frontend-facade` - REST HATEOAS front-end facade API
 
 ## Usage
 
 Run
 
 ```bash
+./mvnw clean package
+java -jar hateoas-dual-layer-backend/target/hateoas-dual-layer-backend-0.0.1-SNAPSHOT.war &
+java -jar hateoas-dual-layer-frontend-facade/target/hateoas-dual-layer-frontend-facade-0.0.1-SNAPSHOT.war &
+```
+
+or
+
+```shell
 mvnw clean package
-java -jar extended-hateotas-rest/extended-hateotas-rest-0.0.1-SNAPSHOT.war
-java -jar extended-hateotas-rest/extended-hateotas-facade-0.0.1-SNAPSHOT.war
+start "" java -jar hateoas-dual-layer-backend/target/extended-hateotas-rest-0.0.1-SNAPSHOT.war
+start "" java -jar hateoas-dual-layer-frontend-facade/target/hateoas-dual-layer-frontend-facade-0.0.1-SNAPSHOT.war
 ```
 
 to start the applications and navigate to [http://localhost:8000/swagger-ui.html](http://localhost:8000/swagger-ui.html) and [http://localhost:7000/swagger-ui.html](http://localhost:7000/swagger-ui.html)
