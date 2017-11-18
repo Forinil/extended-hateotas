@@ -1,5 +1,6 @@
 package com.github.forinil.hateoasduallayer.controller;
 
+import com.github.forinil.hateoasduallayer.describer.ApplicationControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.Action;
 import com.github.forinil.hateoasduallayer.model.ApplicationData;
 import com.github.forinil.hateoasduallayer.model.ExtendedApplicationData;
@@ -7,6 +8,7 @@ import com.github.forinil.hateoasduallayer.model.UserData;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
@@ -25,11 +27,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
 @RequestMapping("/application")
-public class ApplicationController {
+public class ApplicationController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
     @Value("${webservices.url:-http://localhost:8080/}")
     private String baseUrl;
+
+    @Autowired
+    ApplicationController(ApplicationControllerDescriber describer) {
+        super(describer);
+    }
 
     @GetMapping(value = "/details/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Finds application by ID",
