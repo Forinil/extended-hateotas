@@ -1,6 +1,5 @@
-server:
-  port: 7000
 logging:
+  file: logs/frontend-facade.log
   level:
     root: INFO
     com:
@@ -9,5 +8,3 @@ logging:
     org:
       springframework:
         web: DEBUG
-webservices:
-  url: http://localhost:8000/

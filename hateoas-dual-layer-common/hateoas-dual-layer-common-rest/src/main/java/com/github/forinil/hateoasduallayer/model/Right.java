@@ -5,5 +5,6 @@ public enum Right {
     R_SIGN,
     R_SEND,
     R_DELETE,
+    R_DETAILS,
     R_LIST
 }

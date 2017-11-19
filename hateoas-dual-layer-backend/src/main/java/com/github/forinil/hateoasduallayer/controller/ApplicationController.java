@@ -3,10 +3,13 @@ package com.github.forinil.hateoasduallayer.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import static org.springframework.http.MediaType.*;
 
+import com.github.forinil.hateoasduallayer.describer.ApplicationControllerDescriber;
+import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.ApplicationData;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -22,8 +25,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/application")
-public class ApplicationController {
+public class ApplicationController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
+
+    @Autowired
+    public ApplicationController(ApplicationControllerDescriber controllerDescriber) {
+        super(controllerDescriber);
+    }
 
     @GetMapping(value = "/details/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Finds application by ID",
@@ -38,7 +46,7 @@ public class ApplicationController {
         applicationData.add(linkTo(methodOn(ApplicationController.class).getApplicationData(id)).withSelfRel());
 
         logger.debug("Returning application: {}", applicationData);
-        return new ResponseEntity<>(applicationData, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(applicationData);
     }
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_UTF8_VALUE)
@@ -60,6 +68,6 @@ public class ApplicationController {
         Resources<ApplicationData> resources = new Resources<>(applicationDataList, linkTo(methodOn(ApplicationController.class).getAllApplications()).withSelfRel());
 
         logger.debug("Returning: {}", applicationDataList);
-        return new ResponseEntity<>(resources, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(resources);
     }
 }

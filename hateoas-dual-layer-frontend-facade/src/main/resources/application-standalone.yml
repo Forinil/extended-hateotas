@@ -1,0 +1,4 @@
+server:
+  port: 7000
+webservices:
+  url: http://localhost:8000/

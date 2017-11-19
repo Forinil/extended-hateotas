@@ -1,0 +1,4 @@
+logging:
+  file: ../logs/frontend-facade.log
+webservices:
+  url: http://localhost:8080/backend/

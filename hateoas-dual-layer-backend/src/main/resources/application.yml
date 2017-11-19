@@ -1,6 +1,5 @@
-server:
-  port: 8000
 logging:
+  file: logs/backend.log
   level:
     root: INFO
     com:

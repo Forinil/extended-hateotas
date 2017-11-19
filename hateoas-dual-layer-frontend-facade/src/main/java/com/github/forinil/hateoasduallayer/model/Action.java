@@ -5,5 +5,6 @@ public enum Action {
     SIGN,
     SEND,
     DELETE,
-    LIST
+    LIST,
+    DETAILS,
 }
