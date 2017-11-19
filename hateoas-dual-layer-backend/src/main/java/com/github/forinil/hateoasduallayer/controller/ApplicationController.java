@@ -6,6 +6,7 @@ import static org.springframework.http.MediaType.*;
 import com.github.forinil.hateoasduallayer.describer.ApplicationControllerDescriber;
 import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.ApplicationData;
+import com.github.forinil.hateoasduallayer.model.ApplicationDataList;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class ApplicationController extends BaseController {
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Lists all applications")
-    public HttpEntity<Resources<ApplicationData>> getAllApplications() {
+    public HttpEntity<ApplicationDataList> getAllApplications() {
         logger.debug("Requested all applications");
         List<ApplicationData> applicationDataList = new ArrayList<>(3);
 
@@ -65,7 +66,9 @@ public class ApplicationController extends BaseController {
             applicationDataList.add(applicationData);
         }
 
-        Resources<ApplicationData> resources = new Resources<>(applicationDataList, linkTo(methodOn(ApplicationController.class).getAllApplications()).withSelfRel());
+        ApplicationDataList resources = new ApplicationDataList();
+        resources.setApplicationList(applicationDataList);
+        resources.add(linkTo(methodOn(ApplicationController.class).getAllApplications()).withSelfRel());
 
         logger.debug("Returning: {}", applicationDataList);
         return ResponseEntity.status(HttpStatus.OK).body(resources);

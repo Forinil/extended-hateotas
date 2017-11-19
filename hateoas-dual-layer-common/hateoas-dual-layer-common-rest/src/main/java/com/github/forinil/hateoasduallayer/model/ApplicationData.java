@@ -10,6 +10,12 @@ import java.util.Date;
 @ToString
 public class ApplicationData extends ResourceSupport {
 
+    public ApplicationData(ApplicationData applicationData) {
+        setApplicationId(applicationData.getApplicationId());
+        setCreationDate(applicationData.getCreationDate());
+        setContent(applicationData.getContent());
+    }
+
     @Getter
     @Setter
     @JsonProperty("id")
