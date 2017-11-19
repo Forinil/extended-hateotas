@@ -28,6 +28,9 @@ to access Swagger UI for the Backend and Frontend Facade respectively.
 
 ### Tomcat deployment
 
+
+#### By setting up local Tomcat installation
+
 * Download Tomcat 8.5 or above.
 * Create (or open if it already exists) file ${catalina.home}/bin/setenv.{bat,sh} depending on operating system.
 * On Windows: Add line `set "CATALINA_OPTS=%CATALINA_OPTS% -Dspring.profiles.active=tomcat"` to file setenv.bat.
@@ -38,3 +41,18 @@ to access Swagger UI for the Backend and Frontend Facade respectively.
 * Navigate to [http://localhost:8080/backend/swagger-ui.html](http://localhost:8080/backend/swagger-ui.html) and [http://localhost:8080/frontend-facade/swagger-ui.html](http://localhost:8080/frontend-facade/swagger-ui.html) 
 to access Swagger UIs for both APIs.
 
+#### Via Cargo Plugin
+
+Run 
+
+```bash
+./mvnw --projects hateoas-dual-layer-cargo-deployer cargo:run
+```
+
+or 
+
+```shell
+mvnw --projects hateoas-dual-layer-cargo-deployer cargo:run
+```
+
+depending on your operating system to automatically download, setup and run Tomcat 9.0.1 with both backend and frontend facade applications deployed.
