@@ -46,7 +46,7 @@ public class ApplicationController extends BaseController {
         applicationData.add(linkTo(methodOn(ApplicationController.class).getApplicationData(id)).withSelfRel());
 
         logger.debug("Returning application: {}", applicationData);
-        return new ResponseEntity<>(applicationData, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(applicationData);
     }
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_UTF8_VALUE)
@@ -68,6 +68,6 @@ public class ApplicationController extends BaseController {
         Resources<ApplicationData> resources = new Resources<>(applicationDataList, linkTo(methodOn(ApplicationController.class).getAllApplications()).withSelfRel());
 
         logger.debug("Returning: {}", applicationDataList);
-        return new ResponseEntity<>(resources, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(resources);
     }
 }

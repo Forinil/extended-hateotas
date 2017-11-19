@@ -3,7 +3,6 @@ package com.github.forinil.hateoasduallayer.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import static org.springframework.http.MediaType.*;
 
-import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
 import com.github.forinil.hateoasduallayer.describer.UserControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.Right;
 import com.github.forinil.hateoasduallayer.model.UserData;
@@ -35,13 +34,17 @@ public class UserController extends BaseController {
         logger.debug("Requested user for ID: {}", id);
         UserData userData = new UserData();
 
+        if (id > 1) {
+            return ResponseEntity.notFound().build();
+        }
+
         userData.setUserID(id);
-        userData.setUserLogin("TESTUSER");
+        userData.setUserLogin("TESTUSER_%d");
         setRights(userData);
         userData.add(linkTo(methodOn(UserController.class).getUserData(id)).withSelfRel());
 
         logger.debug("Returning user: {}", userData);
-        return new ResponseEntity<>(userData, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(userData);
 
     }
 
@@ -65,13 +68,14 @@ public class UserController extends BaseController {
         Resources<UserData> resources = new Resources<>(userDataList, linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel());
 
         logger.debug("Returning: {}", userDataList);
-        return new ResponseEntity<>(resources, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(resources);
     }
 
     private void setRights(UserData userData) {
         if (userData.getUserID() == 0) {
             userData.setUserRights(new ArrayList<>(5));
             userData.getUserRights().add(Right.R_DELETE);
+            userData.getUserRights().add(Right.R_DETAILS);
             userData.getUserRights().add(Right.R_LIST);
             userData.getUserRights().add(Right.R_SAVE);
             userData.getUserRights().add(Right.R_SEND);

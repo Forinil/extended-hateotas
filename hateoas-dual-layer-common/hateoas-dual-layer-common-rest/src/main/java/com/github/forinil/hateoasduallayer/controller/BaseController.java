@@ -1,6 +1,7 @@
 package com.github.forinil.hateoasduallayer.controller;
 
 import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
@@ -24,6 +25,7 @@ public abstract class BaseController {
     }
 
     @GetMapping(value = "/", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Controller index")
     public HttpEntity<Resource<String>> index(){
         logger.debug("Requesting service index");
 
