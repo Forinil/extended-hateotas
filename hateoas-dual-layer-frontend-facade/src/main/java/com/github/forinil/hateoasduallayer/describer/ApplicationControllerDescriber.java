@@ -17,7 +17,7 @@ public class ApplicationControllerDescriber implements ControllerDescriber {
         List<Link> links = new ArrayList<>(2);
 
         links.add(linkTo(methodOn(ApplicationController.class).index()).withSelfRel());
-        links.add(linkTo(methodOn(ApplicationController.class).getAllApplications()).withRel("list"));
+        links.add(linkTo(methodOn(ApplicationController.class).getApplicationsList()).withRel("list"));
 
         return links;
     }

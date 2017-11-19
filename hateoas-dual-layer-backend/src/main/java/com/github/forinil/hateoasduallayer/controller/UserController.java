@@ -7,6 +7,8 @@ import com.github.forinil.hateoasduallayer.describer.UserControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.Right;
 import com.github.forinil.hateoasduallayer.model.UserData;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resources;
@@ -30,6 +32,8 @@ public class UserController extends BaseController {
     @GetMapping(value = "/details/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Finds user by ID",
         notes = "ID must be an integer")
+    @ApiResponses({@ApiResponse(code = 200, message = "User found"),
+            @ApiResponse(code = 404, message = "User not found")})
     public HttpEntity<UserData> getUserData(@PathVariable(value="id") int id) {
         logger.debug("Requested user for ID: {}", id);
         UserData userData = new UserData();
@@ -50,6 +54,7 @@ public class UserController extends BaseController {
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Lists all users")
+    @ApiResponses({@ApiResponse(code = 200, message = "Users found")})
     public HttpEntity<Resources<UserData>> getAllUsers() {
         logger.debug("Requested all applications");
         List<UserData> userDataList = new ArrayList<>(2);

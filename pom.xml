@@ -22,14 +22,26 @@
 		<module>hateoas-dual-layer-backend</module>
 		<module>hateoas-dual-layer-common</module>
 		<module>hateoas-dual-layer-frontend-facade</module>
+		<module>hateoas-dual-layer-cargo-deployer</module>
 	</modules>
 
 	<properties>
+        <!-- general properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+        <!-- dependency versions -->
 		<swagger.version>2.7.0</swagger.version>
 		<swagger.annotation.version>1.5.13</swagger.annotation.version>
+
+        <!-- plugin versions -->
+        <plugin.cargo.version>1.6.2</plugin.cargo.version>
+		<plugin.compiler.version>2.3.2</plugin.compiler.version>
+
+		<!-- tomcat configuration -->
+		<tomcat.user>tomcat:tomcat:manager-gui,admin-gui</tomcat.user>
+		<tomcat.debug.args>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -Dspring.profiles.active=tomcat</tomcat.debug.args>
 	</properties>
 
 	<dependencyManagement>
@@ -75,7 +87,52 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>${plugin.compiler.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.cargo</groupId>
+					<artifactId>cargo-maven2-plugin</artifactId>
+					<version>${plugin.cargo.version}</version>
+					<configuration>
+						<container>
+							<containerId>tomcat9x</containerId>
+							<zipUrlInstaller>
+								<url>http://ftp.ps.pl/pub/apache/tomcat/tomcat-9/v9.0.1/bin/apache-tomcat-9.0.1.zip</url>
+								<downloadDir>${project.basedir}/downloads</downloadDir>
+								<extractDir>${project.basedir}/extracts</extractDir>
+							</zipUrlInstaller>
+						</container>
+						<configuration>
+							<type>standalone</type>
+							<properties>
+								<cargo.servlet.port>8080</cargo.servlet.port>
+								<cargo.servlet.users>${tomcat.user}</cargo.servlet.users>
+								<cargo.start.jvmargs>${tomcat.debug.args}</cargo.start.jvmargs>
+							</properties>
+						</configuration>
+						<deployables>
+							<deployable>
+								<groupId>com.github.forinil</groupId>
+								<artifactId>hateoas-dual-layer-backend</artifactId>
+								<type>war</type>
+								<properties>
+									<context>backend</context>
+								</properties>
+								<pingURL>http://localhost:8080/backend/</pingURL>
+								<pingTimeout>1000</pingTimeout>
+							</deployable>
+							<deployable>
+								<groupId>com.github.forinil</groupId>
+								<artifactId>hateoas-dual-layer-frontend-facade</artifactId>
+								<type>war</type>
+								<properties>
+									<context>frontend-facade</context>
+								</properties>
+								<pingURL>http://localhost:8080/frontend-facade/</pingURL>
+								<pingTimeout>1000</pingTimeout>
+							</deployable>
+						</deployables>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
