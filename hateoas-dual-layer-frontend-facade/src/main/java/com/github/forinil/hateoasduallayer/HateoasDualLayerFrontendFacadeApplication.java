@@ -1,5 +1,6 @@
 package com.github.forinil.hateoasduallayer;
 
+import com.github.forinil.hateoasduallayer.config.GemFireConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,6 +15,6 @@ public class HateoasDualLayerFrontendFacadeApplication extends SpringBootServlet
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(HateoasDualLayerFrontendFacadeApplication.class, args);
+		SpringApplication.run(new Class[]{HateoasDualLayerFrontendFacadeApplication.class}, args);
 	}
 }

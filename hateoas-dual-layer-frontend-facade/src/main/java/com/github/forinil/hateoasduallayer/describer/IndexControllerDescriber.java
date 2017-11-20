@@ -1,6 +1,6 @@
 package com.github.forinil.hateoasduallayer.describer;
 
-import com.github.forinil.hateoasduallayer.controller.ApplicationController;
+import com.github.forinil.hateoasduallayer.controller.FacadeApplicationController;
 import com.github.forinil.hateoasduallayer.controller.IndexController;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.hateoas.Link;
@@ -21,7 +21,7 @@ public class IndexControllerDescriber implements ControllerDescriber {
         List<Link> links = new ArrayList<>(2);
 
         links.add(linkTo(methodOn(IndexController.class).index()).withSelfRel());
-        links.add(linkTo(methodOn(ApplicationController.class).index()).withRel("applications"));
+        links.add(linkTo(methodOn(FacadeApplicationController.class).index()).withRel("applications"));
 
         return links;
     }
