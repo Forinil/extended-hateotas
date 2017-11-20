@@ -7,4 +7,10 @@ logging:
         forinil: TRACE
     org:
       springframework:
+        data: DEBUG
         web: DEBUG
+spring:
+  data:
+    gemfire:
+      cache:
+        log-level: ERROR

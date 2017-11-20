@@ -20,6 +20,54 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-to-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jul-to-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-gemfire</artifactId>
+			<exclusions>
+				<!--<exclusion>
+                	<groupId>io.pivotal.gemfire</groupId>
+                	<artifactId>geode-core</artifactId>
+            	</exclusion>
+            	<exclusion>
+                	<groupId>io.pivotal.gemfire</groupId>
+                	<artifactId>geode-cq</artifactId>
+            	</exclusion>
+            	<exclusion>
+                	<groupId>io.pivotal.gemfire</groupId>
+                	<artifactId>geode-lucene</artifactId>
+            	</exclusion>
+            	<exclusion>
+                	<groupId>io.pivotal.gemfire</groupId>
+                	<artifactId>geode-wan</artifactId>
+            	</exclusion>-->
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+        	</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,6 +93,56 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+
+		<!--<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-cq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-lucene</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-wan</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>-->
+
+		<!-- Slf4J -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- Log4J2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-jcl</artifactId>
+			<version>${log4j2.version}</version>
 		</dependency>
 	</dependencies>
 

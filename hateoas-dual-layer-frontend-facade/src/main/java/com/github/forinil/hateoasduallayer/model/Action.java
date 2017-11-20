@@ -6,5 +6,5 @@ public enum Action {
     SEND,
     DELETE,
     LIST,
-    DETAILS,
+    DETAILS
 }

@@ -1,6 +1,6 @@
 package com.github.forinil.hateoasduallayer.describer;
 
-import com.github.forinil.hateoasduallayer.controller.ApplicationController;
+import com.github.forinil.hateoasduallayer.controller.FacadeApplicationController;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +16,8 @@ public class ApplicationControllerDescriber implements ControllerDescriber {
     public List<Link> getHATEOASLinks() {
         List<Link> links = new ArrayList<>(2);
 
-        links.add(linkTo(methodOn(ApplicationController.class).index()).withSelfRel());
-        links.add(linkTo(methodOn(ApplicationController.class).getApplicationsList()).withRel("list"));
+        links.add(linkTo(methodOn(FacadeApplicationController.class).index()).withSelfRel());
+        links.add(linkTo(methodOn(FacadeApplicationController.class).getApplicationsList()).withRel("list"));
 
         return links;
     }
