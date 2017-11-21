@@ -3,8 +3,7 @@ package com.github.forinil.hateoasduallayer.client;
 import com.github.forinil.hateoasduallayer.model.ApplicationData;
 import com.github.forinil.hateoasduallayer.model.ApplicationDataList;
 import com.github.forinil.hateoasduallayer.model.UserData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -13,11 +12,12 @@ import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Component
+@Slf4j
 public class RestClient {
-    private static Logger logger = LoggerFactory.getLogger(RestClient.class);
 
     @Value("${webservices.url:-http://localhost:8080/}")
     private String baseUrl;
