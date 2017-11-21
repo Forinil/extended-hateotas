@@ -1,17 +1,11 @@
 package com.github.forinil.hateoasduallayer.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-import static org.springframework.http.MediaType.*;
-
 import com.github.forinil.hateoasduallayer.describer.ApplicationControllerDescriber;
-import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
 import com.github.forinil.hateoasduallayer.model.ApplicationData;
 import com.github.forinil.hateoasduallayer.model.ApplicationDataList;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +18,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+
 @RestController
 @RequestMapping("/application")
+@Slf4j
 public class ApplicationController extends BaseController {
-    private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
     @Autowired
     public ApplicationController(ApplicationControllerDescriber controllerDescriber) {

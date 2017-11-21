@@ -4,8 +4,7 @@ import com.github.forinil.hateoasduallayer.describer.ControllerDescriber;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
+@Slf4j
 public abstract class BaseController {
-    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     private ControllerDescriber controllerDescriber;
 

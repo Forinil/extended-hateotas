@@ -1,5 +1,6 @@
 package com.github.forinil.hateoasduallayer.config;
 
+import com.github.forinil.hateoasduallayer.entity.User;
 import org.apache.geode.cache.GemFireCache;
 import org.apache.geode.cache.client.ClientRegionShortcut;
 import com.github.forinil.hateoasduallayer.entity.SearchResult;
@@ -18,6 +19,18 @@ public class GemFireConfig {
     public ClientRegionFactoryBean<SearchResult, UUID> searchCacheRegion(GemFireCache gemfireCache) {
 
         ClientRegionFactoryBean<SearchResult, UUID> searchCacheRegion = new ClientRegionFactoryBean<>();
+
+        searchCacheRegion.setCache(gemfireCache);
+        searchCacheRegion.setClose(false);
+        searchCacheRegion.setShortcut(ClientRegionShortcut.LOCAL);
+
+        return searchCacheRegion;
+    }
+
+    @Bean("Users")
+    public ClientRegionFactoryBean<User, Integer> usersRegion(GemFireCache gemfireCache) {
+
+        ClientRegionFactoryBean<User, Integer> searchCacheRegion = new ClientRegionFactoryBean<>();
 
         searchCacheRegion.setCache(gemfireCache);
         searchCacheRegion.setClose(false);
