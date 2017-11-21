@@ -7,6 +7,7 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class UserData extends ResourceSupport {
 
