@@ -46,7 +46,7 @@ public class UserController extends BaseController {
         }
 
         userData.setUserID(id);
-        userData.setUserLogin("TESTUSER_%d");
+        userData.setUserLogin(String.format("TESTUSER_%d", id));
         setRights(userData);
         userData.add(linkTo(methodOn(UserController.class).getUserData(id)).withSelfRel());
 
