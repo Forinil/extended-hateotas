@@ -1,15 +1,16 @@
 package com.github.forinil.hateoasduallayer.controller;
 
-import com.github.forinil.hateoasduallayer.client.RestClient;
 import com.github.forinil.hateoasduallayer.describer.ApplicationControllerDescriber;
-import com.github.forinil.hateoasduallayer.entity.SearchResult;
 import com.github.forinil.hateoasduallayer.model.*;
-import com.github.forinil.hateoasduallayer.repository.SearchResultRepository;
+import com.github.forinil.hateoasduallayer.service.ApplicationService;
+import com.github.forinil.hateoasduallayer.service.AuthenticationService;
+import com.github.forinil.hateoasduallayer.service.AuthorizationService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -31,17 +31,19 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @Slf4j
 public class FacadeApplicationController extends BaseController {
 
-    private RestClient restClient;
-
-    private SearchResultRepository searchResultRepository;
+    private AuthorizationService authorizationService;
+    private AuthenticationService authenticationService;
+    private ApplicationService applicationService;
 
     @Autowired
     FacadeApplicationController(ApplicationControllerDescriber describer,
-                                RestClient restClient,
-                                SearchResultRepository searchResultRepository) {
+                                AuthorizationService authorizationService,
+                                AuthenticationService authenticationService,
+                                ApplicationService applicationService) {
         super(describer);
-        this.restClient = restClient;
-        this.searchResultRepository = searchResultRepository;
+        this.authorizationService = authorizationService;
+        this.authenticationService = authenticationService;
+        this.applicationService = applicationService;
     }
 
     @GetMapping(value = "/details/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
@@ -52,29 +54,22 @@ public class FacadeApplicationController extends BaseController {
             @ApiResponse(code = 403, message = "User does not have a right to view application details"),
             @ApiResponse(code = 404, message = "Application not found")})
     public HttpEntity<ExtendedApplicationData> getApplicationData(@PathVariable(value="id") int id, @RequestParam(value="uid") int uid) {
-        logger.debug("Requested application for ID: {}", id);
-
-        // Get user details
-        Optional<UserData> userServiceResponse = restClient.getUserDetails(uid);
+        logger.debug("Requested application for ID: {} and UID: {}", id, uid);
 
         // If user was not found then given UID is not authorized for the request
-        if (!userServiceResponse.isPresent()) {
+        if (!authenticationService.isUserAuthenticated(uid)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        UserData userData = userServiceResponse.get();
-
-        //right_name = "R_" + action_name
-        List<Action> actions = userData.getUserRights().stream().map(right -> Action.valueOf(right.name().substring(2))).collect(Collectors.toList());
-
-        // If actions list does not contain 'DETAILS' user has no right to display application details
-        if (!actions.contains(Action.DETAILS)) {
+        // Check if user has right to see the list of applications
+        if (!authorizationService.doesUserHaveRight(uid, Right.R_DETAILS)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        // Get application details
-        Optional<ApplicationData> applicationServiceResponse = restClient.getApplicationDetails(id);
+        List<Action> actions = authorizationService.getAvailableActionsForUser(uid);
 
+        // Get application details
+        Optional<ApplicationData> applicationServiceResponse = applicationService.getApplicationForID(id);
         if (!applicationServiceResponse.isPresent()) {
             logger.debug("Application service returned {} - application not found", HttpStatus.NOT_FOUND);
             return ResponseEntity.notFound().build();
@@ -101,49 +96,24 @@ public class FacadeApplicationController extends BaseController {
                                                                @RequestParam(value="sid", required = false) UUID sid) {
         logger.debug("Requested all applications for UID: {} and: SID {}", uid, sid);
 
-        // Get user details
-        Optional<UserData> userServiceResponse = restClient.getUserDetails(uid);
-
         // If user was not found then given UID is not authorized for the request
-        if (!userServiceResponse.isPresent()) {
+        if (!authenticationService.isUserAuthenticated(uid)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        UserData userData = userServiceResponse.get();
-
-        // Check if user has righ to see the list of applications
-        if (!userData.getUserRights().contains(Right.R_LIST)) {
+        // Check if user has right to see the list of applications
+        if (!authorizationService.doesUserHaveRight(uid, Right.R_LIST)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        Optional<SearchResult> searchResult;
-        List<ApplicationData> dataList;
+        Pair<UUID, List<ApplicationData>> pair = applicationService.getApplicationList(sid);
 
-        if (sid != null) {
-            logger.debug("Trying to retrieve search result for sid {} from cache", sid);
-            searchResult = searchResultRepository.findById(sid);
-        } else {
-            searchResult = Optional.empty();
-            sid = UUID.randomUUID();
-        }
+        sid = pair.getFirst();
+        List<ApplicationData> dataList = pair.getSecond();
 
-        if (searchResult.isPresent()) {
-            //Get list of applications from cache
-            dataList = searchResult.get().getApplicationList();
-        } else {
-            //Get list of applications from REST service
-            Optional<List<ApplicationData>> applicationServiceResponse = restClient.getApplicationList();
-
-            if (!applicationServiceResponse.isPresent()) {
-                logger.debug("Application service returned {} - application list not found", HttpStatus.NOT_FOUND);
-                return ResponseEntity.notFound().build();
-            }
-
-            dataList = applicationServiceResponse.get();
-
-            SearchResult newSearchResult = new SearchResult(sid, dataList);
-            logger.debug("Saving search result {} to cache", searchResult);
-            searchResultRepository.save(newSearchResult);
+        if (dataList.size() == 0) {
+            logger.debug("Application service returned {} - application list not found", HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
 
         List<ApplicationData> applicationDataList = new ArrayList<>(dataList.size());
