@@ -19,15 +19,14 @@ or
 
 ```shell
 mvnw clean package
-start "" java -jar hateoas-dual-layer-backend/target/extended-hateotas-rest-0.0.1-SNAPSHOT.war
-start "" java -jar hateoas-dual-layer-frontend-facade/target/hateoas-dual-layer-frontend-facade-0.0.1-SNAPSHOT.war
+start "" java -Dspring.profiles.active=standalone -jar hateoas-dual-layer-backend/target/hateoas-dual-layer-backend-0.0.1-SNAPSHOT.war
+start "" java -Dspring.profiles.active=standalone -jar hateoas-dual-layer-frontend-facade/target/hateoas-dual-layer-frontend-facade-0.0.1-SNAPSHOT.war
 ```
 
 to start the applications and navigate to [http://localhost:8000/swagger-ui.html](http://localhost:8000/swagger-ui.html) and [http://localhost:7000/swagger-ui.html](http://localhost:7000/swagger-ui.html)
 to access Swagger UI for the Backend and Frontend Facade respectively.
 
 ### Tomcat deployment
-
 
 #### By setting up local Tomcat installation
 
