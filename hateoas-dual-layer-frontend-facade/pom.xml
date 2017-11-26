@@ -75,11 +75,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.github.forinil</groupId>
 			<artifactId>hateoas-dual-layer-common-data</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.github.forinil</groupId>
 			<artifactId>hateoas-dual-layer-common-rest</artifactId>
