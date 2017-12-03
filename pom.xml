@@ -42,7 +42,7 @@
 
 		<!-- tomcat configuration -->
 		<tomcat.user>tomcat:tomcat:manager-gui,admin-gui</tomcat.user>
-		<tomcat.debug.args>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -Dspring.profiles.active=tomcat</tomcat.debug.args>
+		<tomcat.debug.args>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -Dspring.profiles.active=tomcat,mock_data,local_cache</tomcat.debug.args>
 	</properties>
 
 	<dependencyManagement>
