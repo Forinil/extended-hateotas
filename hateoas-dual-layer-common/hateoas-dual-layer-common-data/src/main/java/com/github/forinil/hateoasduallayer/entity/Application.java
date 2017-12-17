@@ -1,9 +1,6 @@
 package com.github.forinil.hateoasduallayer.entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 @AllArgsConstructor
+@Getter
 public class Application {
 
     @Id

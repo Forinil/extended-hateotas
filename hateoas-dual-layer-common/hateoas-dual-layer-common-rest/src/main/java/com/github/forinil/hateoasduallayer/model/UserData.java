@@ -9,22 +9,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter
+@Setter
 public class UserData extends ResourceSupport {
 
-    @Getter
-    @Setter
     @JsonProperty("id")
     private int userID;
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty
     private String userLogin;
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty
     private List<Right> userRights;
 }

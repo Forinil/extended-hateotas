@@ -8,11 +8,11 @@ import java.util.List;
 
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 public class ApplicationDataList extends ResourceSupport {
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty(value = "list")
     private List<ApplicationData> applicationList;
 }
