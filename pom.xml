@@ -5,7 +5,7 @@
 
 	<groupId>com.github.forinil</groupId>
 	<artifactId>hateoas-dual-layer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>hateoas-dual-layer</name>

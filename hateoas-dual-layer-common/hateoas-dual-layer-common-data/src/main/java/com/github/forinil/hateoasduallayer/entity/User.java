@@ -16,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private int ID;
+    private Integer id;
 
     @Column(nullable = false)
     private String login;

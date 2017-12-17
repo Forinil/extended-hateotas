@@ -19,7 +19,7 @@ public class Application {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private Date creationDate;
