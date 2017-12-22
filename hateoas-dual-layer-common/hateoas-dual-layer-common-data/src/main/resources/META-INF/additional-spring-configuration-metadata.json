@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "sourceType": "com.github.forinil.hateoasduallayer.config.properties.H2ConfigProperties",
+      "name": "spring.h2.console.custom",
+      "type": "com.github.forinil.hateoasduallayer.config.properties.H2ConfigProperties$Custom",
+      "description": "Custom properties to be used in configuring H2 Database."
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.h2.console.custom.enabled",
+      "type": "java.lang.String",
+      "description": "Enables custom H2 console as describer in class com.github.forinil.hateoasduallayer.config.H2Config."
+  }
+] }
