@@ -40,3 +40,4 @@ extracts/
 
 ### Logs ###
 *.log
+*.log.*.gz
