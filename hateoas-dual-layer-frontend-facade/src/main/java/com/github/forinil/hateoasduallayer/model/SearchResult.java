@@ -6,10 +6,10 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 public class SearchResult extends ApplicationDataList {
 
     @NonNull
-    @Getter
-    @Setter
     private UUID sid;
 }

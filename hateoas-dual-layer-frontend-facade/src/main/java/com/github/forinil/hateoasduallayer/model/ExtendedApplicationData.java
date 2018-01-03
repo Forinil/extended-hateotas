@@ -8,6 +8,8 @@ import java.util.List;
 
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 public class ExtendedApplicationData extends ApplicationData {
 
     public ExtendedApplicationData(ApplicationData applicationData) {
@@ -18,8 +20,6 @@ public class ExtendedApplicationData extends ApplicationData {
     }
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty
     private List<Action> allowedActions;
 }

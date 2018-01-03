@@ -8,6 +8,8 @@ import java.util.Date;
 
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 public class ApplicationData extends ResourceSupport {
 
     public ApplicationData(ApplicationData applicationData) {
@@ -16,20 +18,14 @@ public class ApplicationData extends ResourceSupport {
         setContent(applicationData.getContent());
     }
 
-    @Getter
-    @Setter
     @JsonProperty("id")
     private int applicationId;
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty
     private Date creationDate;
 
     @NonNull
-    @Getter
-    @Setter
     @JsonProperty
     private String content;
 }

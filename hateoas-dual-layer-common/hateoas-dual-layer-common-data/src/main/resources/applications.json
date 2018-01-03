@@ -1,0 +1,17 @@
+[
+  {
+    "_class": "com.github.forinil.hateoasduallayer.entity.Application",
+    "creationDate": "1513542139",
+    "content": "JPA Application 1"
+  },
+  {
+    "_class": "com.github.forinil.hateoasduallayer.entity.Application",
+    "creationDate": "1513542140",
+    "content": "JPA Application 2"
+  },
+  {
+    "_class": "com.github.forinil.hateoasduallayer.entity.Application",
+    "creationDate": "1513542141",
+    "content": "JPA Application 3"
+  }
+]

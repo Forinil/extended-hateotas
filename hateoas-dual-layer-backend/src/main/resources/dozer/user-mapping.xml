@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <custom-converters>
+            <converter type="com.github.forinil.hateoasduallayer.converter.RightModelToRightEntityConverter">
+                <class-a>com.github.forinil.hateoasduallayer.model.Right</class-a>
+                <class-b>com.github.forinil.hateoasduallayer.entity.Right</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+    <mapping>
+        <class-a>com.github.forinil.hateoasduallayer.entity.User</class-a>
+        <class-b>com.github.forinil.hateoasduallayer.model.UserData</class-b>
+        <field>
+            <a>id</a>
+            <b>userId</b>
+        </field>
+        <field>
+            <a>login</a>
+            <b>userLogin</b>
+        </field>
+        <field>
+            <a>rights</a>
+            <b>userRights</b>
+        </field>
+    </mapping>
+</mappings>

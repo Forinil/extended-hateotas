@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>hateoas-dual-layer-frontend-facade</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>hateoas-dual-layer-frontend-facade</name>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>com.github.forinil</groupId>
 		<artifactId>hateoas-dual-layer</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -75,15 +75,15 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.github.forinil</groupId>
 			<artifactId>hateoas-dual-layer-common-data</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+			<version>${project.version}</version>
+		</dependency>-->
 		<dependency>
 			<groupId>com.github.forinil</groupId>
 			<artifactId>hateoas-dual-layer-common-rest</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
