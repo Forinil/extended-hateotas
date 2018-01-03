@@ -5,6 +5,17 @@ HATEOAS Dual Layer Proof-of-concept
 * `hateoas-dual-layer-backend` - REST HATEOAS API for single domain (here for simplicity one app for both Application and Security domain)
 * `hateoas-dual-layer-frontend-facade` - REST HATEOAS front-end facade API
 
+## Profiles
+
+* `standalone` - run as standalone application
+* `tomcat`- run in Tomcat server container
+* `mock_data` - use mocked data
+* `jpa_data` - use JPA to fetch data (must be used with one of database-specific profiles)
+* `h2` - use h2 database (must be used in conjunction with profile `jpa_data`)
+
+To run application correctly either `standalone` or `tomcat` profile and either `mock_data` or `jpa_data` profile must be enabled. If `jpa_data` profile is enabled, one of the database-specific profiles
+should be enabled as well.
+
 ## Usage
 
 Run
