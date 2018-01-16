@@ -1,4 +1,13 @@
 language: java
+cache:
+  directories:
+    - "$HOME/.m2"
+before_cache:
+  - rm -rf $HOME/.m2/repository/com/github/forinil
 jdk:
   - oraclejdk8
   - openjdk8
+script:
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+after_success:
+  - ./mvnw test -B
