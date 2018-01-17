@@ -1,21 +1,26 @@
 language: java
 cache:
   directories:
-    - "$HOME/.m2"
+  - "$HOME/.m2"
 before_cache:
-  - rm -rf $HOME/.m2/repository/com/github/forinil
+- rm -rf $HOME/.m2/repository/com/github/forinil
 jdk:
-  - oraclejdk8
-  - openjdk8
+- oraclejdk8
+- openjdk8
 notifications:
   slack:
     rooms:
-      - forinil:a3dT9lopKm3ZUUcbRtVZUQMr#general
-      - forinil:a3dT9lopKm3ZUUcbRtVZUQMr#hateoas-dual-layer  
+      - secure: "PXsTW/4w63vQBIa/Z4tCZcejKuPO0YvcOJ/IPx1RO5hl0kgONwFSNVCH5yP7wSRqc1Vgj8vzl86b4M5g13Zt5OSy8tp2iw9HFBklP62QQ65ZfiNo1hir3baRf+1DpZ6k6kD3cvo3Yw6pqm3CezQZ/dnP+MxIsaMMBmaVxyW8Bi/NZkzuIlTmfKrdi6CSz
+        8qXV4pneWbiN+DvadOrRSIncw+pciGpXgWjbnAVDP0aukSHOSweihMWqd87lNQd5gTwH4FuKaYm5Pii7XdyT/UxMYPXkz0Cm3GBYeFMzG6qAgoGCzZhhvLvZPZlcIjQFMdR49Vo6axQSBiEFjh7vF65XkQOG6o5ZOsexEV4jzzbZnY2z4ZqITmNBR+OHNz466bGMfwve
+        ipZtko5uPjAmXv1RzVxNYQ7HhwqrZft8f+tJJ9YTQRdxMSinc0Lp5ajNWyDCcPjopx21Mi0AXh+GgswV/LoNicViiwSvFb/HFzj2dJ7J3p56r3hUknBWlgX5xj84gz+Vrn62aejOjnAIQiSNtQd1VUxF2t9UYPdXEMg98NX7+yj2sKIjxJmt3Z/PKdCmXi6Up0Vi1gNi
+        s3ewMQYDPDWLro+IZrTxJXMWe28QbkdoxbTa7VdwkPBhA4wp02jwpD9RscLhLe36WYvNxyhcUB++s0NvrB3Xmb1KBWnHTI="
+      - secure: "yxIq0cx4aMiQgBSzPqxT75zccEYTyqbDEVZEdnXcJPwJEZBJ3256uGnZ8EU0whIcsHCqz3KnOlHgNe1ygf3TIsfVmtwX3noiau36G11cGS+mL09D92k1svsExx7h7qvlxvpTp2HcjeJrHbZVteBTl3FPS7dreKI4hbPKd7VNivBHEJSE5SfCgNr7B7guE
+        ijU8yaor6NEh6aDSt9ZLXlTHyTPa0yx+E5yrazZMGtzP+HQWHabCyqgsXKbHz4nPTVVmVW+2jwgxd40bVsJONhwKp3jdn6oBV+mgWLXwg6P3uSzSI1IBUYdX8ZI6qHpAkzbDsF2QcaQSRefH1FisxQLCQy8vgvkCl4EKxrqgOc1wLNNywWMjZDNRGN7G6R3nIYkRG/12
+        DA5TYwezheTcO8y5qxYoT0PoPmE30UXHQwMTS9LxZxKL+WyZCz8ErYuEi95ngiOWXhjA7NJXspv8H4Yq/UcpJXankZLejTHl7ccefqakDN5FVoXBi7h8ubqSdXgeWBegsNQpS4cVAjHTN1Q/c4qRJFxn9pUi3AOdoW1SGWpmjRnO/tPk8ecqTlR8j/uGvVT6OrBdZoT9
+        QYeSuKd171nR+fI3ikFZHtWCXPedQXaN0/ZXI1hXKfQg0wjn/V78la/PHvqKmG2AHdhx3e0+8y1mANS8Jy+tSKJSceMXTk="
 install:
-  # - ./mvnw dependency:go-offline -DexcludeGroupIds=com.github.forinil
-  - true
+- true
 script:
-  - ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- "./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 after_success:
-  - ./mvnw test -B
+- "./mvnw test -B"
