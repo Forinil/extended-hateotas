@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>hateoas-dual-layer-common-rest</name>
+    <name>hateoas-dual-layer-common-profiles</name>
     <description>HATEOAS Dual Layer Proof-of-concept common REST libraries</description>
 
     <parent>
