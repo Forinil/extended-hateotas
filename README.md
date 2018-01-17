@@ -12,8 +12,12 @@ HATEOAS Dual Layer Proof-of-concept
 * `mock_data` - use mocked data
 * `jpa_data` - use JPA to fetch data (must be used with one of database-specific profiles)
 * `h2` - use h2 database (must be used in conjunction with profile `jpa_data`)
+* `local_cache` - use local cache for caching query results
+* `remote_cache` - use remote cache for caching query results
 
-To run application correctly either `standalone` or `tomcat` profile and either `mock_data` or `jpa_data` profile must be enabled. If `jpa_data` profile is enabled, one of the database-specific profiles
+To run application correctly either `standalone` or `tomcat` profile and either `mock_data` or `jpa_data` profile 
+must be enabled along with profile `local_cache` (profile `remote_cache` is not yet implemented). 
+If `jpa_data` profile is enabled, one of the database-specific profiles
 should be enabled as well.
 
 ## Usage
